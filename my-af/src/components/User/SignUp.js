@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button, notification, Form, Input, Layout, Modal } from 'antd';
 import { signUp } from '../../services/userService';
 import "./css/signUp.css";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 
+    const formRef = useRef();
 
     const [api, contextHolder] = notification.useNotification();
 
@@ -26,13 +27,14 @@ const SignUp = () => {
     const submit = (initialValues) => {
         console.log(initialValues);
         signUp(initialValues).then(res => {
-            if (res.data.data) {
-                localStorage.setItem("token", res.data.data.user.accessToken);
+            if (res.data) {
+                localStorage.setItem("token", res.data.user.accessToken);
             }
             openNotification(res)
         }).catch(err => {
             openNotification(err);
         });
+        formRef.current?.resetFields();
     }
 
     return (
@@ -48,6 +50,7 @@ const SignUp = () => {
                     <div className="form-container">
                         <Form
                             name="basic"
+                            ref={formRef}
                             labelCol={{ span: 8 }}
                             wrapperCol={{ span: 16 }}
                             style={{ maxWidth: 600 }}
