@@ -28,3 +28,14 @@ export const logIn = async (data) => {
         return error.response.data
     });
 };
+
+export const getUserById = async (id) => {
+    return await fetchRequest.get("http://localhost:8000" + "/api/users/" + id)
+        .then((response) => {
+            console.log(response)
+            return response.data
+        }).catch((error) => {
+            console.log(error)
+            return error.response.data
+        });
+};

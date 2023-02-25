@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Button, notification, Form, Input, Layout, Modal } from 'antd';
+import { Button, notification, Form, Input, Modal } from 'antd';
 import { signUp } from '../../services/userService';
 import "./css/signUp.css";
 import logo from "../../logo.svg";
@@ -29,8 +29,10 @@ const SignUp = () => {
         signUp(initialValues).then(res => {
             if (res.data) {
                 localStorage.setItem("token", res.data.user.accessToken);
+                navigate("/user/" + res.data.user.id);
             }
             openNotification(res)
+
         }).catch(err => {
             openNotification(err);
         });

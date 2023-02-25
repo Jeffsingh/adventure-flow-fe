@@ -2,10 +2,12 @@ import React from "react";
 import { Button, Form, Input, Modal, notification } from "antd";
 import logo from "../../logo.svg";
 import { logIn } from "../../services/userService";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
 
     const [api, contextHolder] = notification.useNotification();
+    const navigate = useNavigate();
 
     const openNotification = (data) => {
         api.open({
@@ -19,6 +21,7 @@ const LogIn = () => {
         logIn(initialValues).then(res => {
             if (res.data) {
                 localStorage.setItem("token", res.data.user.accessToken);
+                navigate("/user/" + res.data.user.id);
             }
             openNotification(res)
         }).catch(err => {
