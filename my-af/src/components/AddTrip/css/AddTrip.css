@@ -1,0 +1,44 @@
+.add-trip-modal {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    justify-content: space-between;
+}
+
+.add-trip-modal .ant-modal {
+    height: 500px;
+    border-radius: 20px;
+}
+
+.add-trip-modal .ant-modal-content {
+    height: 100%;
+}
+
+.add-trip-modal .ant-modal-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.add-trip-modal .modal-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.ant-modal-wrap {
+    background: none;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ant-modal-mask {
+    background: none !important;
+}
