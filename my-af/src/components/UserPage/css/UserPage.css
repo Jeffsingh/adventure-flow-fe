@@ -17,10 +17,11 @@
     height: 50px;
     margin: 10px;
     font-size: 30px;
-    text-align: center;
-    align-content: center;
     vertical-align: middle;
     background-color: silver;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 

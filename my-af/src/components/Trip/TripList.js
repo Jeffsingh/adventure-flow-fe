@@ -12,7 +12,6 @@ const TripList = ({ visible }) => {
 
     useEffect(() => {
         getTripsByUserId(id).then(res => {
-            console.log(res);
             setTrips(res);
         }).catch(err => {
             console.log(err);
@@ -23,7 +22,7 @@ const TripList = ({ visible }) => {
     return (trips && <div>
         <div className="trip-list">
             {trips.map(trip => (
-                <TripItem trip={trip} />
+                <TripItem trip={trip} key={trip.id} />
             ))}
         </div>
     </div>
