@@ -1,0 +1,7 @@
+.trip-list {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+}

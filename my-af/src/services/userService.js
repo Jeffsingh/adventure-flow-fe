@@ -1,7 +1,9 @@
 import fetchRequest from "./fetchClient";
 
+const apiURL = process.env.REACT_APP_API_URL;
+
 export const signUp = async (data) => {
-    return await fetchRequest.post("http://localhost:8000" + "/api/users/signup", {
+    return await fetchRequest.post(apiURL + "/api/users/signup", {
         first_name: data.first_name,
         last_name: data.last_name,
         email: data.email,
@@ -17,7 +19,7 @@ export const signUp = async (data) => {
 
 
 export const logIn = async (data) => {
-    return await fetchRequest.post("http://localhost:8000" + "/api/users/login", {
+    return await fetchRequest.post(apiURL + "/api/users/login", {
         email: data.email,
         password: data.password
     }).then((response) => {
@@ -30,7 +32,7 @@ export const logIn = async (data) => {
 };
 
 export const getUserById = async (id) => {
-    return await fetchRequest.get("http://localhost:8000" + "/api/users/" + id)
+    return await fetchRequest.get(apiURL + "/api/users/" + id)
         .then((response) => {
             console.log(response)
             return response.data
