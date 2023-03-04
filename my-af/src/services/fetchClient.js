@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getToken = () => localStorage.getItem("accessToken") || false;
+const getToken = () => localStorage.getItem("token") || false;
 
 const fetchRequest = axios.create({
     headers: {
