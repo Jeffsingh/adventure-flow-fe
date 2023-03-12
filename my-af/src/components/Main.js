@@ -12,7 +12,7 @@ const Main = () => {
         if (!userData && Math.floor(new Date().getTime() / 1000)  > userData.exp ) {
             navigate("/signup");
         }
-        navigate("/mytrips");
+        navigate("/start");
     })
 
     return (

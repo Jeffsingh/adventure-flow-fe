@@ -21,7 +21,7 @@ const LogIn = () => {
         logIn(initialValues).then(res => {
             if (res.data) {
                 localStorage.setItem("token", res.data.user.accessToken);
-                navigate("/mytrips");
+                navigate("/start");
             }
             openNotification(res)
         }).catch(err => {
