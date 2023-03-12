@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Container from '@mui/material/Container'; 
 import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -5,20 +6,33 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import { adventureTravelLocations } from './locations';
+import { parseJwt } from "../../services/parseJWT";
  
+const Greeting = ({ name }) => { 
+    return (
+        <Typography variant="subtitle2" component="h1" gutterBottom>
+            {name && `Hey ${name}! ` }
+            We want to make planning your adventure easy! 
+        </Typography> 
+    );
+}; 
 
 const Launch = () => { 
+    const [user, setUser] = useState(); 
+
+    useEffect(() => {
+        let userData = parseJwt(localStorage.getItem("token")); 
+        setUser(userData); 
+    }, []);
+
     return (
         <Container maxWidth="md"> 
             <Box sx={{ my: 4, minHeight: "80vh"}}>
                 <Typography variant="h4" component="h1">
                     Adventure Flow 
                 </Typography>  
-                <Typography variant="subtitle2" component="h1" gutterBottom>
-                    We want to make planning your adventure easy 
-                </Typography>  
-                <br />
-                <br />
+                <Greeting name={user?.first_name} />
+                
                 <Typography variant="h6" component="h1" gutterBottom>
                    Where are you headed?
                 </Typography>  
