@@ -1,13 +1,18 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../logo.svg';
+import { parseJwt } from "../services/parseJWT";
 
 const Main = () => {
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        navigate("/signup");
+        let userData = parseJwt (localStorage.getItem("token")); 
+        if (!userData && Math.floor(new Date().getTime() / 1000)  > userData.exp ) {
+            navigate("/signup");
+        }
+        navigate("/mytrips");
     })
 
     return (

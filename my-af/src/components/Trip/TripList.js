@@ -4,11 +4,9 @@ import { useParams } from 'react-router-dom';
 import TripItem from "./TripItem";
 import "./css/TripList.css";
 
-const TripList = ({ visible }) => {
-
-    const { id } = useParams();
-    const [trips, setTrips] = useState([]);
-
+const TripList = ({ id }) => {
+ 
+    const [trips, setTrips] = useState([]); 
 
     useEffect(() => {
         getTripsByUserId(id).then(res => {
@@ -16,17 +14,21 @@ const TripList = ({ visible }) => {
         }).catch(err => {
             console.log(err);
         })
-    }, [visible])
+    }, []); 
 
+    if (!trips) {
+        return null; 
+    }
 
-    return (trips && <div>
-        <div className="trip-list">
-            {trips.map(trip => (
-                <TripItem trip={trip} key={trip.id} />
-            ))}
+    return (
+        <div>
+            <div className="trip-list">
+                {trips.map(trip => (
+                    <TripItem trip={trip} key={trip.id} />
+                ))}
+            </div>
         </div>
-    </div>
-    )
+    );
 }
 
 export default TripList;

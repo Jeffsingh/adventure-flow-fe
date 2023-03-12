@@ -29,7 +29,7 @@ const SignUp = () => {
         signUp(initialValues).then(res => {
             if (res.data) {
                 localStorage.setItem("token", res.data.user.accessToken);
-                navigate("/user/" + res.data.user.id);
+                navigate("/mytrips");
             }
             openNotification(res)
 
