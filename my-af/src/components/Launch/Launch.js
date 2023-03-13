@@ -84,6 +84,13 @@ const Launch = () => {
                     {p && 
                         <Box>
                             <span><b>{p?.description}</b> sounds like fun!</span> 
+                            <br />
+                            <br />
+                            <br />
+                            <Typography variant="h6" component="h1" gutterBottom>
+                                When are you going?
+                            </Typography>  
+                            <TextField type="date"></TextField>
                         </Box>
                     }
                     <BasicTimeline />
