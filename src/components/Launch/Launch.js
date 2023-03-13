@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import { useGetUserData } from "../../hooks/useGetUserData";
 import LocationSearch from "./LocationSearch";
 import { Copyright } from "../Copyright"; 
-import { Button, IconButton } from "@mui/material";
+import { Button, ButtonGroup, IconButton } from "@mui/material";
 import Duration from "./Duration";
 import Activities from "./Activities";
 import { BasicTimeline } from "./BasicTimeline";
@@ -33,7 +33,7 @@ const Launch = () => {
     const [step, setStep ] = useState(1); 
 
     const [time, setTime] = useState([]); 
-    const [date, setDate] = useState(moment().format('YYYY-MM-DD')); 
+    const [date, setDate] = useState(); 
     const [activitiesList, setActivitiesList] = useState([]); 
 
     let userData = useGetUserData();  
@@ -78,7 +78,7 @@ const Launch = () => {
                     {step === 2 && 
                         <Box sx={{width: "60vw"}}>
                             <span><b>{place?.description}</b> sounds like fun!</span>  
-                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(1)}>
+                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep( step - 1)}>
                                 <ClearIcon fontSize="inherit" />
                             </IconButton>
                             <br />
@@ -94,7 +94,7 @@ const Launch = () => {
                     {step === 3 && 
                         <Box sx={{width: "60vw"}}> 
                             <span><b> {duration}</b> in <b>{place?.description}</b> sounds like an adventure!</span>  
-                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(2)}>
+                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(step - 1)}>
                                 <ClearIcon fontSize="inherit" />
                             </IconButton>
                             <br />
@@ -109,7 +109,7 @@ const Launch = () => {
                      {step === 4 && 
                         <Box sx={{width: "60vw"}}> 
                             <span>Your <b>{activitiesList.join(', ')}</b> adventure for <b> {duration}</b> to <b>{place?.description}</b> is coming together!</span>  
-                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(3)}>
+                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(step - 1)}>
                                 <ClearIcon fontSize="inherit" />
                             </IconButton>
                            
@@ -117,11 +117,12 @@ const Launch = () => {
                     }
                     <BasicTimeline step={step}   />
                 </Box>  
-                {step === 3 &&
-                    <Box> 
-                        <Button variant="contained" disabled={activitiesList?.length < 1} onClick={() => setStep(step + 1)} >Next</Button>
-                    </Box>
-                }
+                <Box> 
+                    <ButtonGroup>
+                        {step < 4 && <Button sx={{marginRight: "20px"}} variant="contained" onClick={() => setStep(step + 1)} >Next</Button>}
+                        {step > 1 && <Button sx={{marginRight: "20px"}} variant="outlined" color="warning" onClick={() => setStep(step - 1)} >Back</Button>}
+                    </ButtonGroup>   
+                </Box>
                
             </Box>
             
