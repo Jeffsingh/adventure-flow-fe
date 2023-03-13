@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
+import moment from "moment"; 
 import Container from '@mui/material/Container'; 
-import Typography from '@mui/material/Typography';
-import Autocomplete from '@mui/material/Autocomplete';
+import Typography from '@mui/material/Typography'; 
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box'; 
-import { adventureTravelLocations } from './locations';  
+import Box from '@mui/material/Box';  
 import { useGetUserData } from "../../hooks/useGetUserData";
 import LocationSearch from "./LocationSearch";
-import { Copyright } from "../Copyright";
- 
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import { Button } from "@mui/material";
+import { Copyright } from "../Copyright"; 
+import { Button, IconButton } from "@mui/material";
 import Duration from "./Duration";
 import Activities from "./Activities";
+import { BasicTimeline } from "./BasicTimeline";
+import ClearIcon from '@mui/icons-material/Clear';
 
 const useGoogleSearch = true; 
 
@@ -31,46 +25,7 @@ const Greeting = ({ name }) => {
 }; 
   
  
-
-export const BasicTimeline = (props) => {
-    const { step } = props;
-
-    const getColor = (stepNumber, currentStep) => {
-        if (stepNumber < currentStep) {
-            return "success"; 
-        } 
-        if (stepNumber === currentStep) {
-            return "warning";
-        }
-        return "grey"; 
-    }; 
-
-    return (
-        <Timeline>
-        <TimelineItem>
-            <TimelineSeparator>
-            <TimelineDot color={getColor(1, step)} />
-            <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>Where</TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-            <TimelineSeparator>
-            <TimelineDot color={getColor(2, step)} />
-            <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent>When</TimelineContent>
-        </TimelineItem>
-        <TimelineItem>
-            <TimelineSeparator>
-            <TimelineDot color={getColor(3, step)}/>
-            </TimelineSeparator>
-            <TimelineContent>What</TimelineContent>
-        </TimelineItem>
-        </Timeline>
-    );
-}
-
+ 
 
 const Launch = () => { 
     const [place, setPlace] = useState(); 
@@ -78,6 +33,7 @@ const Launch = () => {
     const [step, setStep ] = useState(1); 
 
     const [time, setTime] = useState([]); 
+    const [date, setDate] = useState(moment().format('YYYY-MM-DD')); 
     const [activitiesList, setActivitiesList] = useState([]); 
 
     let userData = useGetUserData();  
@@ -93,6 +49,13 @@ const Launch = () => {
     }, [place, time]); 
     
     const duration = time && time[0] ? time[0].charAt(0).toUpperCase() + time[0].slice(1) : ""; 
+
+    const onChangeDate = e => {
+
+        const newDate = moment(new Date(e.target.value)).add(4, "hours").format('YYYY-MM-DD');
+        setDate(newDate); 
+        
+    };
 
     return (
         <Container maxWidth="md"> 
@@ -114,20 +77,26 @@ const Launch = () => {
                     }
                     {step === 2 && 
                         <Box sx={{width: "60vw"}}>
-                            <span><b>{place?.description}</b> sounds like fun!</span> 
+                            <span><b>{place?.description}</b> sounds like fun!</span>  
+                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(1)}>
+                                <ClearIcon fontSize="inherit" />
+                            </IconButton>
                             <br />
                             <br />
                             <br />
                             <Typography variant="h6" component="h1" gutterBottom>
                                 When are you going?
                             </Typography>  
-                            <TextField type="date" sx={{marginBottom: "24px"}}></TextField>
-                            <Duration setTime={setTime} />
+                            <TextField type="date" sx={{marginBottom: "24px"}} onChange={onChangeDate} value={date} ></TextField>
+                            <Duration setTime={setTime} time={time} />
                         </Box>
                     }
                     {step === 3 && 
                         <Box sx={{width: "60vw"}}> 
-                            <span><b> {duration} in  {place?.description}</b> sounds like an adventure!</span> 
+                            <span><b> {duration}</b> in <b>{place?.description}</b> sounds like an adventure!</span>  
+                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(2)}>
+                                <ClearIcon fontSize="inherit" />
+                            </IconButton>
                             <br />
                             <br />
                             <br />
@@ -139,9 +108,12 @@ const Launch = () => {
                     }
                     <BasicTimeline step={step}   />
                 </Box>  
-                <Box sx={{}}> 
-                    <Button variant="contained" >Next</Button>
-                </Box>
+                {step === 3 &&
+                    <Box> 
+                        <Button variant="contained" disabled={activitiesList?.length < 1} >Next</Button>
+                    </Box>
+                }
+               
             </Box>
             
             <Copyright sx={{marginTop: "auto"}} />
