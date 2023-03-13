@@ -1,10 +1,10 @@
-.user-page {
+.my-trips {
     padding: 0;
     margin: 0;
     display: flex;
-}
+} 
 
-.user-page .content {
+.umy-trips.content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -12,7 +12,7 @@
     max-width: 900px;
 }
 
-.content .add-button {
+.my-trips .add-button {
     width: 50px;
     height: 50px;
     margin: 10px;
@@ -22,10 +22,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
+} 
 
-
-.user-page .sider {
+.my-trips.sider {
     height: 100vh;
     width: 300px;
     border-right: 1px solid silver;
@@ -33,7 +32,7 @@
     overflow: hidden;
 }
 
-.user-page .sider .sider-header {
+.my-trips.sider .sider-header {
     background-color: white;
     height: 200px;
     width: 200px;
@@ -42,14 +41,9 @@
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
-.user-page .user-info-container {
+.my-trips.user-info-container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-.user-info-container .full-name {
-    font-size: 20px;
-
-}
+} 

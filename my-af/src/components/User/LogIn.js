@@ -3,10 +3,12 @@ import { Button, Form, Input, Modal, notification } from "antd";
 import logo from "../../logo.svg";
 import { logIn } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
-
+import { Copyright } from "../Copyright"; 
+import { Box, Container } from "@mui/material";
 const LogIn = () => {
 
     const [api, contextHolder] = notification.useNotification();
+
     const navigate = useNavigate();
 
     const openNotification = (data) => {
@@ -21,7 +23,7 @@ const LogIn = () => {
         logIn(initialValues).then(res => {
             if (res.data) {
                 localStorage.setItem("token", res.data.user.accessToken);
-                navigate("/user/" + res.data.user.id);
+                navigate("/start");
             }
             openNotification(res)
         }).catch(err => {
@@ -30,7 +32,8 @@ const LogIn = () => {
     }
 
     return (
-        <>
+        <Container>
+            <Box sx={{height: "90vh"}}>
             {contextHolder}
             <div className="registration">
                 <Modal open={true} span={6} className="modal" closeIcon footer={null} width={"800px"}>
@@ -69,9 +72,12 @@ const LogIn = () => {
                             </Form.Item>
                         </Form>
                     </div>
-                </Modal>
+                </Modal> 
             </div>
-        </>
+            </Box>
+             
+            <Copyright  sx={{marginTop: "auto"}}  />
+        </Container>
     )
 }
 
