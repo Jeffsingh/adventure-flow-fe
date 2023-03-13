@@ -16,6 +16,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import { Button } from "@mui/material";
+import Duration from "./Duration";
 
 const useGoogleSearch = true; 
 
@@ -90,7 +91,8 @@ const Launch = () => {
                             <Typography variant="h6" component="h1" gutterBottom>
                                 When are you going?
                             </Typography>  
-                            <TextField type="date"></TextField>
+                            <TextField type="date" sx={{marginBottom: "24px"}}></TextField>
+                            <Duration />
                         </Box>
                     }
                     <BasicTimeline />
