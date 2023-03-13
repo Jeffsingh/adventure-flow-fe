@@ -106,11 +106,20 @@ const Launch = () => {
                             <Activities setActivitiesList={setActivitiesList} />
                         </Box>
                     }
+                     {step === 4 && 
+                        <Box sx={{width: "60vw"}}> 
+                            <span>Your <b>{activitiesList.join(', ')}</b> adventure for <b> {duration}</b> to <b>{place?.description}</b> is coming together!</span>  
+                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(3)}>
+                                <ClearIcon fontSize="inherit" />
+                            </IconButton>
+                           
+                        </Box>
+                    }
                     <BasicTimeline step={step}   />
                 </Box>  
                 {step === 3 &&
                     <Box> 
-                        <Button variant="contained" disabled={activitiesList?.length < 1} >Next</Button>
+                        <Button variant="contained" disabled={activitiesList?.length < 1} onClick={() => setStep(step + 1)} >Next</Button>
                     </Box>
                 }
                
