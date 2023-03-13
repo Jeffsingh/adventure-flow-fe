@@ -17,23 +17,37 @@ const MenuProps = {
   },
 };
 
-const names = [
-  '1 day',
-  '2 days',
-  '3 days',
-  '4 days',
-  '5 days',
-  '6 days',
-  '7 days',
-  '8 days',
-  '9 days',
-  '10 days',
-  '11 days',
-  '12 days',
-  '13 days',
-  '14 days',
-  '3 weeks',
-  '4 weeks or more', 
+const names =  [
+    "Backpacking",
+    "Bouldering",
+    "Camping",
+    "Canoeing",
+    "Cross-country skiing",
+    "Dog sledding",
+    "Fishing",
+    "Hiking",
+    "Hunting",
+    "Ice fishing",
+    "Ice skating",
+    "Kayaking",
+    "Kiteboarding",
+    "Mountaineering",
+    "Mountain biking",
+    "Road cycling",
+    "Rock climbing",
+    "Scuba diving",
+    "Skiing",
+    "Snorkeling",
+    "Snowboarding",
+    "Snowmobiling",
+    "Snowshoeing",
+    "Stand-up paddleboarding",
+    "Surfing",
+    "Swimming",
+    "Trail running",
+    "Whitewater rafting",
+    "Windsurfing",
+    "Zip-lining"
 ];
 
 function getStyles(name, personName, theme) {
@@ -45,19 +59,19 @@ function getStyles(name, personName, theme) {
   };
 }
 
-export default function Duration({setTime}) {
+export default function Activities({setActivitiesList}) {
   const theme = useTheme();
-  const [duration, setDuration] = React.useState([]);
+  const [list, setList] = React.useState([]);
 
   React.useEffect(() => {
-    setTime(duration);
-  },[duration])
+    setActivitiesList(list); 
+  },[list])
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setDuration(
+    setList(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
@@ -66,20 +80,22 @@ export default function Duration({setTime}) {
   return (
     <div>
       <FormControl sx={{  width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Duration</InputLabel>
+        <InputLabel id="demo-multiple-name-label">Activities</InputLabel>
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name" 
-          value={duration}
+          value={list}
           onChange={handleChange}
-          input={<OutlinedInput label="Duration" />}
+          multiple
+          
+          input={<OutlinedInput label="Activities" />}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
             <MenuItem
               key={name}
               value={name}
-              style={getStyles(name, duration, theme)}
+              style={getStyles(name, list, theme)}
             >
               {name}
             </MenuItem>
