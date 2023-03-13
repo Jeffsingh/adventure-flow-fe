@@ -15,6 +15,7 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
+import { Button } from "@mui/material";
 
 const useGoogleSearch = true; 
 
@@ -58,7 +59,7 @@ export const BasicTimeline = () => {
 
 
 const Launch = () => { 
-    const [user, setUser] = useState(); 
+    const [p, setPlace] = useState(); 
 
     let userData = useGetUserData();  
  
@@ -70,25 +71,28 @@ const Launch = () => {
                 </Typography>  
                 <Greeting name={userData?.first_name} />
                 <Box  sx={{  display: "flex", flexDirection: "row"}}>  
-                    <Box>
-                        <Typography variant="h6" component="h1" gutterBottom>
-                        Where are you headed?
-                        </Typography>  
-                        
-                        {useGoogleSearch && <LocationSearch />} 
-                        {!useGoogleSearch && <Autocomplete
-                            disablePortal
-                            id="combo-box-demo"
-                            options={adventureTravelLocations}
-                            sx={{ width: 300 }}
-                            renderInput={(params) => <TextField {...params} label="Location" />}
-                        />}
-                    </Box>
+                    {!p && 
+                        <Box>
+                            <Typography variant="h6" component="h1" gutterBottom>
+                            Where are you headed?
+                            </Typography>  
+                            
+                           <LocationSearch  setPlace={setPlace} /> 
+                          
+                        </Box>
+                    }
+                    {p && 
+                        <Box>
+                            <span><b>{p?.description}</b> sounds like fun!</span> 
+                        </Box>
+                    }
                     <BasicTimeline />
+                </Box>  
+                <Box sx={{}}> 
+                    <Button variant="contained" >Next</Button>
                 </Box>
-                
-               
             </Box>
+            
             <Copyright sx={{marginTop: "auto"}} />
         </Container>
     );

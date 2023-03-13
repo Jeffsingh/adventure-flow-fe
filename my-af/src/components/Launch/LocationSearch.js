@@ -28,7 +28,8 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null };
 
-export default function LocationSearch() {
+export default function LocationSearch(props) {
+  const { setPlace } = props;
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState(moab);
@@ -108,12 +109,13 @@ export default function LocationSearch() {
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
+        setPlace(newValue); 
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Add a location" fullWidth />
+        <TextField {...params} label="adventure spot" fullWidth />
       )}
       renderOption={(props, option) => {
         const matches =
