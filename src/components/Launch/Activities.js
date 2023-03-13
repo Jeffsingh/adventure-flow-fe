@@ -83,7 +83,7 @@ export default function Activities({setActivitiesList}) {
           value={list}
           onChange={handleChange}
           multiple
-          
+          renderValue={(selected) => selected.join(', ')}
           input={<OutlinedInput label="Activities" />}
           MenuProps={MenuProps}
         >
