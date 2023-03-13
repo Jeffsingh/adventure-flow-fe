@@ -39,28 +39,20 @@ const names = [
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
-      personName.indexOf(name) === -1
+      personName?.indexOf(name) === -1
         ? theme.typography.fontWeightRegular
         : theme.typography.fontWeightMedium,
   };
 }
 
-export default function Duration({setTime}) {
-  const theme = useTheme();
-  const [duration, setDuration] = React.useState([]);
-
-  React.useEffect(() => {
-    setTime(duration);
-  },[duration])
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setDuration(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
+export default function Duration({setTime, time}) {
+  const theme = useTheme(); 
+ 
+  const handleChange = (event) => { 
+    
+    const value =  event?.target?.value; 
+    const d = typeof value === 'string' ? value.split(',') : []; 
+    setTime(d);
   };
 
   return (
@@ -70,7 +62,7 @@ export default function Duration({setTime}) {
         <Select
           labelId="demo-multiple-name-label"
           id="demo-multiple-name" 
-          value={duration}
+          value={time}
           onChange={handleChange}
           input={<OutlinedInput label="Duration" />}
           MenuProps={MenuProps}
@@ -79,7 +71,7 @@ export default function Duration({setTime}) {
             <MenuItem
               key={name}
               value={name}
-              style={getStyles(name, duration, theme)}
+              style={getStyles(name, time, theme)}
             >
               {name}
             </MenuItem>

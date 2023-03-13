@@ -1,10 +1,6 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useTheme } from '@mui/material/styles'; 
+import { Checkbox, Select, FormControl, InputLabel, OutlinedInput, MenuItem, ListItemText } from '@mui/material'; 
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -87,17 +83,15 @@ export default function Activities({setActivitiesList}) {
           value={list}
           onChange={handleChange}
           multiple
-          
+          renderValue={(selected) => selected.join(', ')}
           input={<OutlinedInput label="Activities" />}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, list, theme)}
-            >
-              {name}
+          
+           {names.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={list.indexOf(name) > -1} />
+              <ListItemText primary={name} />
             </MenuItem>
           ))}
         </Select>
