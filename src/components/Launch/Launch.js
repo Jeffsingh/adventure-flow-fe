@@ -57,7 +57,7 @@ const Launch = () => {
         
     };
 
-    let formattedMonth = moment(date).format("M");
+    let formattedMonth = moment(date).format("MMMM");
     let placeDescription = place?.description?.split(',')[0] || "";
     return (
         <Container maxWidth="md"> 
@@ -108,15 +108,8 @@ const Launch = () => {
                             <Activities setActivitiesList={setActivitiesList} />
                         </Box>
                     }
-                     {step === 4 ? 
-                        
-                        <Box sx={{width: "60vw"}} gutterBottom>  
-                            <Typography variant="h6" component="h1" gutterBottom>
-                                We have found some cool things to do in <b>{place?.description}</b>. 
-                                <br />
-                                <br />
-                                <b>Add</b> what you like to your <b>itinerary</b>.  
-                            </Typography>   
+                     {step === 4 ?  
+                        <Box sx={{width: "60vw"}} gutterBottom>   
                             <ItineraryItems month={formattedMonth} place={placeDescription} />
                         </Box>
                     : null }
