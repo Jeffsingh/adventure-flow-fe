@@ -12,19 +12,19 @@ import Duration from "./Duration";
 import Activities from "./Activities";
 import { BasicTimeline } from "./BasicTimeline";
 import ClearIcon from '@mui/icons-material/Clear';
+import ItineraryItems from "./ItineraryItems";
 
 const useGoogleSearch = true; 
 
 const Greeting = ({ name }) => { 
     return (
-        <Typography variant="subtitle2" component="h1" sx={{marginBottom: "50px"}}>
+        <Typography variant="subtitle2" component="h1" sx={{marginBottom: "20px"}}>
             {name && `Hey ${name}! ` }
             We want to make planning your adventure easy! 
         </Typography> 
     );
 }; 
   
- 
  
 
 const Launch = () => { 
@@ -37,7 +37,7 @@ const Launch = () => {
     const [activitiesList, setActivitiesList] = useState([]); 
 
     let userData = useGetUserData();  
-
+     
     useEffect(() => {
         if (time && time.length > 0) {
             setStep(3); 
@@ -57,9 +57,11 @@ const Launch = () => {
         
     };
 
+    let formattedMonth = moment(date).format("M");
+    let placeDescription = place?.description?.split(',')[0] || "";
     return (
         <Container maxWidth="md"> 
-            <Box  sx={{  my: 4, minHeight: "80vh"}}>
+            <Box  sx={{  my: 2, minHeight: "80vh"}}>
                 <Typography variant="h4" component="h1">
                     Adventure Flow 
                 </Typography>  
@@ -106,20 +108,23 @@ const Launch = () => {
                             <Activities setActivitiesList={setActivitiesList} />
                         </Box>
                     }
-                     {step === 4 && 
-                        <Box sx={{width: "60vw"}}> 
-                            <span>Your <b>{activitiesList.join(', ')}</b> adventure for <b> {duration}</b> to <b>{place?.description}</b> is coming together!</span>  
-                            <IconButton aria-label="delete" size="small" color="primary" onClick={() => setStep(step - 1)}>
-                                <ClearIcon fontSize="inherit" />
-                            </IconButton>
-                           
+                     {step === 4 ? 
+                        
+                        <Box sx={{width: "60vw"}} gutterBottom>  
+                            <Typography variant="h6" component="h1" gutterBottom>
+                                We have found some cool things to do in <b>{place?.description}</b>. 
+                                <br />
+                                <br />
+                                <b>Add</b> what you like to your <b>itinerary</b>.  
+                            </Typography>   
+                            <ItineraryItems month={formattedMonth} place={placeDescription} />
                         </Box>
-                    }
+                    : null }
                     <BasicTimeline step={step}   />
                 </Box>  
                 <Box> 
                     <ButtonGroup>
-                        {step < 4 && <Button sx={{marginRight: "20px"}} variant="contained" onClick={() => setStep(step + 1)} >Next</Button>}
+                        {step < 5 && <Button sx={{marginRight: "20px"}} variant="contained" onClick={() => setStep(step + 1)} >Next</Button>}
                         {step > 1 && <Button sx={{marginRight: "20px"}} variant="outlined" color="warning" onClick={() => setStep(step - 1)} >Back</Button>}
                     </ButtonGroup>   
                 </Box>
