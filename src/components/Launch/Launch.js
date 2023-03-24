@@ -110,7 +110,7 @@ const Launch = () => {
                     }
                      {step === 4 ?  
                         <Box sx={{width: "60vw"}} gutterBottom>   
-                            <ItineraryItems month={formattedMonth} place={placeDescription} />
+                            <ItineraryItems month={formattedMonth} place={placeDescription} activities={activitiesList} />
                         </Box>
                     : null }
                     <BasicTimeline step={step}   />

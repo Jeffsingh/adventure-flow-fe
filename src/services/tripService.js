@@ -30,7 +30,7 @@ export const createTrip = async (data, id) => {
 };
 
 export const recommendItinerary = async (data) => {
-    return await fetchRequest.get(apiURL + `/api/activities/tips/search?month=${data.month}&location=${data.location}`).then((response) => {
+    return await fetchRequest.get(apiURL + `/api/itineraryItems/tips/search?activities=${data.activities}&month=${data.month}&location=${data.location}`).then((response) => {
         console.log(response)
         return response.data
     }).catch((error) => {
@@ -38,5 +38,4 @@ export const recommendItinerary = async (data) => {
         return error.response.data
     });
 };
-
-//http://localhost:8000/api/activities/tips/search?location=kauai&activities=hiking&activities=camping, swimming, hiking
+ 
