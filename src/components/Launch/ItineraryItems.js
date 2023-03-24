@@ -23,7 +23,7 @@ const iteneraryItems = [
 ];
  
 
-export default function ItineraryItems({month, place}) {
+export default function ItineraryItems({month, place, activities}) {
 
     const [checked, setChecked] = useState([0]); 
     const [items, setItems] = useState([]); 
@@ -32,7 +32,8 @@ export default function ItineraryItems({month, place}) {
     useEffect(() => {
         const data  = {
             month: month, 
-            location: place
+            location: place, 
+            activities: activities.join(',')
         };  
         setLoading(true); 
         recommendItinerary(data).then(res => {
