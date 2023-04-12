@@ -10,6 +10,7 @@ import Launch from './components/Launch/Launch';
 function App() {
   return <Routes>
     <Route path="/" element={<Main />} />
+    <Route path="/auth" element={<Auth />} />
     <Route path="/signup" element={<SignUp />} />
     <Route path="/login" element={<LogIn />} />
     <Route path="/trip" element={<Trip />} />
