@@ -6,6 +6,8 @@ import Trip from './components/Trip';
 import LogIn from './components/User/LogIn';
 import MyTrips from './components/MyTrips/MyTrips';
 import Launch from './components/Launch/Launch';
+import Oauth2 from './components/Oauth2';
+
 
 function App() {
   return <Routes>
@@ -15,6 +17,7 @@ function App() {
     <Route path="/trip" element={<Trip />} />
     <Route path="/mytrips" element={<MyTrips />} />
     <Route path="/start" element={<Launch />} />
+    <Route path="/oauth2" element={<Oauth2 />} />
   </Routes>
 
 }
