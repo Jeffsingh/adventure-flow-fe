@@ -1,17 +1,23 @@
-import React from "react"; 
-import { useGetUserData } from "../hooks/useGetUserData";
-import logo from '../logo.svg'; 
- 
-const Main = () => {
-  
-    useGetUserData(); 
+import React, { useEffect } from "react";  
+import { useNavigate } from "react-router-dom";  
 
+const Main = () => { 
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search); 
+        if (params.get("code")) {
+            window.location.href = "/api/sessions/oauth/google" + window.location.search;   
+        }  else if (params.get("token")) {
+            localStorage.setItem("token", params.get('token')); 
+            navigate("/start");
+        }  else {
+            navigate("/signup");
+        } 
+    }, []); 
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" /> 
-            </header>
-        </div>
+        <></>
     )
 }
 

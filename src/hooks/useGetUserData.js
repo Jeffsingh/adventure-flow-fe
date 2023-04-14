@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useEffect, useState } from "react"; 
 import { parseJwt } from "../services/parseJWT";
 
 export const useGetUserData = () => {
-    const [data, setUserData] = useState();  
-    const navigate = useNavigate();
+    const [data, setUserData] = useState(); 
     useEffect(() => {
-        let userData = parseJwt(localStorage.getItem("token")); 
+        let userData = parseJwt(localStorage.getItem("token"));  
         if (!userData || Math.floor(new Date().getTime() / 1000)  > userData.exp ) {
-            navigate("/signup");
+            setUserData(null);  
         } else {
-            setUserData(userData); 
-            navigate("/start");
+            setUserData(userData);   
         } 
     }, []);
-    return data; 
+    return { data, setUserData };  
 }; 
