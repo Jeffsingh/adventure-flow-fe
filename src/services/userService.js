@@ -1,6 +1,7 @@
 import fetchRequest from "./fetchClient";
 
 const apiURL = process.env.REACT_APP_API_URL;
+export const GOOGLE_OAUTH_URL = apiURL + "/api/sessions/google/redirect";
 
 export const signUp = async (data) => {
     return await fetchRequest.post(apiURL + "/api/users/signup", {
