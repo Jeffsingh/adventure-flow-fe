@@ -13,6 +13,7 @@ import Activities from "./Activities";
 import { BasicTimeline } from "./BasicTimeline";
 import ClearIcon from '@mui/icons-material/Clear';
 import ItineraryItems from "./ItineraryItems";
+import { useNavigate } from "react-router-dom";
 
 const useGoogleSearch = true; 
 
@@ -36,7 +37,12 @@ const Launch = () => {
     const [date, setDate] = useState(); 
     const [activitiesList, setActivitiesList] = useState([]); 
 
-    let userData = useGetUserData();  
+    const navigate = useNavigate();
+
+    let { data } = useGetUserData();  
+    if (!data) {
+        navigate("/signup");
+    }
      
     useEffect(() => {
         if (time && time.length > 0) {
@@ -65,7 +71,7 @@ const Launch = () => {
                 <Typography variant="h4" component="h1">
                     Adventure Flow 
                 </Typography>  
-                <Greeting name={userData?.first_name} />
+                <Greeting name={data?.first_name} />
                 <Box  sx={{  display: "flex", flexDirection: "row"}}>  
                     {step === 1 && 
                         <Box sx={{width: "60vw"}}>
