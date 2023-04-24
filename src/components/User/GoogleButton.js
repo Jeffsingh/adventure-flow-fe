@@ -1,7 +1,5 @@
 import React from 'react';
-
-const GOOGLE_OAUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth';
-
+import { GOOGLE_OAUTH_URL } from "../../services/userService";
 const GoogleButton = () => {
     return (
         <a href={GOOGLE_OAUTH_URL}>
