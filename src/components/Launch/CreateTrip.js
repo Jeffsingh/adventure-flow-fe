@@ -48,13 +48,10 @@ export default function CreateTrip({date, duration, location, itineraryItems}) {
                             <CarRentalIcon />
                         </IconButton>
                     </div>
-                </div>
-                
-            </div>
-            
-           
+                </div> 
+            </div> 
         </Box>
-        <Box>
+        <Box style={{marginBottom: "10px"}}>
             
             <div style={{ width: '100%', margin: "10px 0 10px", display: "flex", flexDirection: "row", justifyContent:"space-between"}}>
                 <Button variant="outlined">Add Itinerary Item</Button>
@@ -72,8 +69,9 @@ export default function CreateTrip({date, duration, location, itineraryItems}) {
                         paginationModel: { page: 0, pageSize: 5 },
                     },
                     }}
-                    pageSizeOptions={[5, 10]}
+                    pageSizeOptions={[10, 20]}
                     checkboxSelection
+                    
                 />
                 : null
             }
