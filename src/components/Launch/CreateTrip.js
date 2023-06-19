@@ -31,15 +31,15 @@ export default function CreateTrip({date, duration, location, itineraryItems}) {
                 Your Trip details
             </Typography>  
             <div style={{marginBottom:"10px"}}>
-                Trip Date: {date}
+                <b>Trip Date:</b> {date}
             </div>
             <div>
-                Duration: {duration}
+                <b>Duration:</b> {duration}
             </div>
             
             <div style={{ width: '100%', margin: "0 0 10px", display: "flex", flexDirection: "row", justifyContent:"space-between"}}>
-                <div className="description-item" style={{height: "22px", marginRight: "100px"}}>
-                    Location: {location?.description}
+                <div className="description-item" style={{height: "22px", marginTop: "10px", marginRight: "100px"}}>
+                    <b>Location:</b> {location?.description}
                 </div>
                 <div style={{ display: "flex", flexDirection: "row"}}>   
                     <div className="description-item">
@@ -61,7 +61,7 @@ export default function CreateTrip({date, duration, location, itineraryItems}) {
             
             <div style={{ width: '100%', margin: "10px 0 10px", display: "flex", flexDirection: "row", justifyContent:"space-between"}}>
                 <Button variant="outlined">Add Itinerary Item</Button>
-                <IconButton color="primary" aria-label="share">
+                <IconButton color="primary" aria-label="share"> 
                     <ShareIcon />
                 </IconButton>
             </div>
@@ -84,14 +84,14 @@ export default function CreateTrip({date, duration, location, itineraryItems}) {
         </Box>  
         <div style={{margin: "40px 0 40px"}} />
         <Box style={{marginBottom: "40px"}}> 
-            {packignRows?.length > 0 ? 
-                <Typography variant="h6" component="h1" gutterBottom>
-                    Your Packing List
-                </Typography>  
-            : null}
+            
+            <Typography variant="h6" component="h1" gutterBottom>
+                Add things you should take
+            </Typography>  
+            
            
             <div style={{ width: '100%', margin: "10px 0 10px", display: "flex", flexDirection: "row", justifyContent:"space-between"}}>
-                <Button variant="outlined">Add Packing List</Button> 
+                <Button variant="outlined">Create My Packing List</Button> 
             </div>
             
             {packignRows?.length > 1 ? 
