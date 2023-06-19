@@ -19,34 +19,37 @@ export default function CreateTrip({date, duration, location, itineraryItems}) {
     const rows = itineraryItems.filter((i) => i?.length > 5).map((item, i) => ({ id: i, description: item })); 
 
     return (
-    <div style={{ width: '100%', marginBottom: "20px"}}>
+    <div style={{ width: '100%'}}>
         <Box style={{marginBottom: "20px"}}> 
             <Typography variant="h6" component="h1" gutterBottom>
                 Your Trip details
             </Typography>  
-            <div>
+            <div style={{marginBottom:"10px"}}>
                 Trip Date: {date}
             </div>
             <div>
                 Duration: {duration}
             </div>
-            <div>
-                Location: {location?.description}
-            </div>
-
-            <div style={{ width: '100%', margin: "10px 0 10px", display: "flex", flexDirection: "row", justifyContent:"flex-start"}}>
-                <div>
-                    Add Flight: 
-                    <IconButton color="primary" aria-label="share">
-                        <FlightIcon />
-                    </IconButton>
+            
+            <div style={{ width: '100%', margin: "0 0 10px", display: "flex", flexDirection: "row", justifyContent:"space-between"}}>
+                <div className="description-item" style={{height: "22px", marginRight: "100px"}}>
+                    Location: {location?.description}
                 </div>
-                <div>
-                    Add Car: 
-                    <IconButton color="primary" aria-label="share">
-                        <CarRentalIcon />
-                    </IconButton>
+                <div style={{ display: "flex", flexDirection: "row"}}>   
+                    <div className="description-item">
+                        Add Flight: 
+                        <IconButton color="primary" aria-label="share">
+                            <FlightIcon />
+                        </IconButton>
+                    </div>
+                    <div className="description-item" style={{ justifyContent:"flex-end"}}>
+                        Add Car: 
+                        <IconButton color="primary" aria-label="share">
+                            <CarRentalIcon />
+                        </IconButton>
+                    </div>
                 </div>
+                
             </div>
             
            
