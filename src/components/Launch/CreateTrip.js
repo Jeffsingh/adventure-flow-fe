@@ -4,10 +4,16 @@ import { Box, Button, ButtonGroup, IconButton, Typography } from '@mui/material'
 import CarRentalIcon from '@mui/icons-material/CarRental';
 import FlightIcon from '@mui/icons-material/Flight'; 
 import ShareIcon from '@mui/icons-material/Share';  
-
+import { Divider } from '@mui/material';
 const columns = [ 
   { field: 'description', headerName: 'Description', width: "100%" }, 
 ];
+
+const packingColumns = [ 
+    { field: 'description', headerName: 'Packing List Item', width: "100%" }, 
+];
+
+const packignRows = [];
 
 // const rows = [
 //   { id: 1, description: 'Visiting the Grand Prismatic Spring' },
@@ -76,6 +82,35 @@ export default function CreateTrip({date, duration, location, itineraryItems}) {
                 : null
             }
         </Box>  
+        <div style={{margin: "40px 0 40px"}} />
+        <Box style={{marginBottom: "40px"}}> 
+            {packignRows?.length > 0 ? 
+                <Typography variant="h6" component="h1" gutterBottom>
+                    Your Packing List
+                </Typography>  
+            : null}
+           
+            <div style={{ width: '100%', margin: "10px 0 10px", display: "flex", flexDirection: "row", justifyContent:"space-between"}}>
+                <Button variant="outlined">Add Packing List</Button> 
+            </div>
+            
+            {packignRows?.length > 1 ? 
+                <DataGrid
+                    rows={packignRows}
+                    columns={packingColumns}
+                    initialState={{
+                    pagination: {
+                        paginationModel: { page: 0, pageSize: 5 },
+                    },
+                    }}
+                    pageSizeOptions={[10, 20]}
+                    checkboxSelection
+                    
+                />
+                : null
+            }
+        </Box>  
+        <Divider style={{margin: "40px 0 40px"}} />
     </div>
   );
 }
