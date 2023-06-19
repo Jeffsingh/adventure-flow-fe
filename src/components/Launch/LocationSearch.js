@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import parse from 'autosuggest-highlight/parse';
 import { debounce } from '@mui/material/utils';
-import { moab } from './moab';
+import { moab } from '../../__mocks__/MoabTripMock';
 //code copied from https://mui.com/material-ui/react-autocomplete/#google-maps-place
 
 // This key was created specifically for the demo in mui.com.
